@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News Automation Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 700px;
+      display: flex;
+      gap: 20px;
+    }
+    .card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+    .info {
+      flex: 1;
+    }
+    .info h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+    .info p {
+      margin: 5px 0;
+    }
+    .metrics {
+      display: flex;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .time {
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <h1>Latest News Dashboard</h1>
+  <div id="dashboard"></div>
+
+  <script>
+    async function loadDashboard() {
+      try {
+        const response = await fetch('dashboard.json');
+        const posts = await response.json();
+        const container = document.getElementById('dashboard');
+
+        posts.forEach(post => {
+          const card = document.createElement('div');
+          card.className = 'card';
+
+          const img = document.createElement('img');
+          img.src = post.image;
+          img.alt = post.title;
+
+          const info = document.createElement('div');
+          info.className = 'info';
+          info.innerHTML = `
+            <h3>${post.title}</h3>
+            <p>${post.post}</p>
+            <div class="engagement">
+            👍 Likes: ${post.likes} | 🔁 Shares: ${post.shares} | 💬 Comments: ${post.comments}
+             </div>
+            <div class="time">${post.source} — Scheduled at ${post.scheduled_time}</div>
+          `;
+
+          card.appendChild(img);
+          card.appendChild(info);
+          container.appendChild(card);
+        });
+      } catch (err) {
+        console.error('Failed to load dashboard.json', err);
+      }
+    }
+
+    loadDashboard();
+  </script>
+</body>
+</html>
