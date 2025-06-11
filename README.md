@@ -34,15 +34,25 @@ This project is a complete automation pipeline that pulls news from top financia
 
 NEWS_AUTOMATION/
 ├── images/                  # Generated news image cards
+
 ├── automation.log           # Log file for fetch + rewrite
+
 ├── dashboard.html           # Frontend dashboard (JS + CSS)
+
 ├── dashboard.json           # Data source for dashboard
+
 ├── fetch_News.py            # Main fetcher and CRM scheduler
+
 ├── reWrite.py               # GPT + image generator
+
 ├── final_posts.json         # Final post output with schedule
+
 ├── top_stories.json         # 1 top story per source
+
 ├── recent_stories.json      # All 5 stories per source
+
 ├── .env                     # Your OpenAI API key
+
 └── README.md                # This documentation
 
 ## Setup Instructions
